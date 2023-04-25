@@ -1,0 +1,604 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API #4",
+    "version": "0.1.0",
+    "description": "API usada para estudos",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/entregadores": {
+      "post": {
+        "summary": "Cadastro de Entregadores",
+        "description": "Rota responsável por cadastrar entregadores",
+        "tags": ["Entregadores"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entregador"
+              },
+              "examples": {
+                "entregador": {
+                  "value": {
+                    "nome": "Cebola",
+                    "telefone": "987654432"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Dados Inválidos."
+          },
+          "200": {
+            "description": "Entregador Cadastrado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entregador"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista de todos os entregadores",
+        "description": "Rota responsável por listar todos os entregadores",
+        "tags": ["Entregadores"],
+        "responses": {
+          "200": {
+            "description": "Lista dos entregadores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Entregador"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entregadores/{id}": {
+      "get": {
+        "description": "Busca um entregador pelo ID",
+        "summary": "Filtragem de entregadores por ID",
+        "tags": ["Entregadores"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Entregador",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entregador encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entregador"
+                },
+                "example": {
+                  "id": 1,
+                  "nome": "Cebola",
+                  "telefone": "987654321",
+                  "createdAt": "2023-04-20T12:33:15.000Z",
+                  "updatedAt": "2023-04-20T12:33:15.000Z",
+                  "destroyTime": null
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entregador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "put": {
+        "description": "Atualização de Entregador pelo ID",
+        "summary": "Atualiza os dados do entregador usando o ID",
+        "tags": ["Entregadores"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Entregador",
+            "require": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Entregador"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entregador atualizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entregador"
+                },
+                "example": {
+                  "id": 1,
+                  "nome": "Cebola",
+                  "telefone": "987654321",
+                  "createdAt": "2023-04-20T12:33:15.000Z",
+                  "updatedAt": "2023-04-20T12:33:15.000Z",
+                  "destroyTime": null
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entregador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui um entregador pelo ID",
+        "tags": ["Entregadores"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do Entregador",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entregador excluido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entregador"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entregador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/entregadores/nome/{nome}": {
+      "get": {
+        "description": "Busca um entregador pelo nome",
+        "summary": "Filtragem de entregadores por nome",
+        "tags": ["Entregadores"],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "path",
+            "description": "Nome do Entregador",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entregador encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entregador"
+                },
+                "example": {
+                  "id": 1,
+                  "nome": "Cebola",
+                  "telefone": "987654321",
+                  "createdAt": "2023-04-20T12:33:15.000Z",
+                  "updatedAt": "2023-04-20T12:33:15.000Z",
+                  "destroyTime": null
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entregador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/entregadores/telefone/{telefone}": {
+      "get": {
+        "description": "Busca um entregador pelo telefone",
+        "summary": "Filtragem de entregadores por telefone",
+        "tags": ["Entregadores"],
+        "parameters": [
+          {
+            "name": "telefone",
+            "in": "path",
+            "description": "Telefone do Entregador",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entregador encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Entregador"
+                },
+                "example": {
+                  "id": 1,
+                  "nome": "Cebola",
+                  "telefone": "987654321",
+                  "createdAt": "2023-04-20T12:33:15.000Z",
+                  "updatedAt": "2023-04-20T12:33:15.000Z",
+                  "destroyTime": null
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entregador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/entregadores/{id}/pedidos/{pedidoId}": {
+      "put": {
+        "summary": "Vincula um pedido existente a um entregador",
+        "tags": ["Entregadores"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "pedidoId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido vinculado ao entregador com sucesso"
+          },
+          "404": {
+            "description": "Entregador não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+
+    "/pedidos": {
+      "post": {
+        "summary": "Cadastro de Pedidos",
+        "description": "Rota responsável por criar pedidos",
+        "tags": ["Pedidos"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pedido"
+              },
+              "examples": {
+                "pedido": {
+                  "value": {
+                    "descricao": "Pizza de M&M",
+                    "endereco_entrega": "Rua das pizzas",
+                    "urgencia": "media"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Dados Inválidos."
+          },
+          "200": {
+            "description": "Pedido criado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pedido"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista de todos os pedidos",
+        "description": "Rota responsável por listar todos os pedidos",
+        "tags": ["Pedidos"],
+        "responses": {
+          "200": {
+            "description": "Lista dos pedidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Pedido"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pedidos/{id}": {
+      "get": {
+        "description": "Busca um pedido pelo ID",
+        "summary": "Filtragem de pedidos por ID",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do pedido",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "descricao": "Hamburguer",
+                  "endereco_entrega": "Rua das pizzas",
+                  "urgencia": "media"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza os pedidos pelo ID",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "require": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pedido"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui um pedido pelo ID",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido excluido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pedido"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/pedidos/descricao/{descricao}": {
+      "get": {
+        "summary": "Filtra pedidos pela descrição",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "name": "descricao",
+            "in": "path",
+            "description": "Descrição do pedido",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "descricao": "Hamburguer",
+                  "endereco_entrega": "Rua das pizzas",
+                  "urgencia": "media"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/pedidos/endereco_entrega/{endereco_entrega}": {
+      "get": {
+        "summary": "Filtragem de pedidos por endereço de entrega",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "name": "endereco_entrega",
+            "in": "path",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "descricao": "Hamburguer",
+                  "endereco_entrega": "Rua das pizzas",
+                  "urgencia": "media"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/pedidos/urgencia/{urgencia}": {
+      "get": {
+        "summary": "Filtragem de pedidos por urgência",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "name": "urgencia",
+            "in": "path",
+            "require": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "descricao": "Hamburguer",
+                  "endereco_entrega": "Rua das pizzas",
+                  "urgencia": "media"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Entregador": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string"
+          }
+        }
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "endereco_entrega": {
+            "type": "string"
+          },
+          "urgencia": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
